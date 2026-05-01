@@ -45,9 +45,10 @@ body {
   font-size: 12px;
   font-weight: 600;
 }
-.nav-badge.google { background: #e8f0fe; color: #4285F4; }
-.nav-badge.meta   { background: #e7f0ff; color: #0866FF; }
-.nav-badge.lsa    { background: #e6f4ea; color: #34A853; }
+.nav-badge.google  { background: #e8f0fe; color: #4285F4; }
+.nav-badge.meta    { background: #e7f0ff; color: #0866FF; }
+.nav-badge.tiktok  { background: #fff0f3; color: #fe2c55; }
+.nav-badge.lsa     { background: #e6f4ea; color: #34A853; }
 
 /* Layout */
 .app-main { max-width: 1400px; margin: 0 auto; padding: 24px; }
@@ -1204,6 +1205,219 @@ textarea { resize: vertical; }
   border-radius: 6px;
   font-size: 12px;
   color: #dc2626;
+}
+
+/* ── TikTok Preview ── */
+.tiktok-screen {
+  border-radius: 24px;
+  overflow: hidden;
+  background: #111;
+  position: relative;
+  aspect-ratio: 9 / 16;
+  display: flex;
+  flex-direction: column;
+}
+.tiktok-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
+  z-index: 1;
+}
+.tiktok-bg-spec { font-size: 9px; color: rgba(255,255,255,0.35); }
+.tiktok-bg-hint { font-size: 9px; color: rgba(255,255,255,0.5); font-style: italic; text-align: center; padding: 0 12px; max-width: 140px; }
+
+.tiktok-top {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 4;
+}
+.tiktok-following { font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 500; }
+.tiktok-foryou { font-size: 11px; color: white; font-weight: 700; }
+.tiktok-active { border-bottom: 2px solid white; padding-bottom: 2px; }
+
+.tiktok-sponsored {
+  position: absolute;
+  top: 38px;
+  left: 8px;
+  z-index: 4;
+  font-size: 8px;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.4);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.tiktok-sidebar {
+  position: absolute;
+  right: 6px;
+  bottom: 60px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.tiktok-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fe2c55;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+.tiktok-action { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tiktok-action-icon { font-size: 18px; }
+.tiktok-action span { font-size: 8px; color: white; }
+.tiktok-disc {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #333, #111);
+  border: 3px solid #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+}
+
+.tiktok-bottom {
+  position: absolute;
+  bottom: 28px;
+  left: 8px;
+  right: 44px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.tiktok-username { font-size: 10px; font-weight: 700; color: white; }
+.tiktok-caption { font-size: 9px; color: rgba(255,255,255,0.9); line-height: 1.4; }
+.tiktok-hashtags { font-size: 9px; color: rgba(255,255,255,0.7); }
+.tiktok-cta-btn {
+  margin-top: 4px;
+  padding: 4px 12px;
+  background: #fe2c55;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.tiktok-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  z-index: 4;
+}
+.tiktok-progress-fill {
+  width: 45%;
+  height: 100%;
+  background: white;
+}
+
+/* ── A/B Variations Panel ── */
+.ab-panel { display: flex; flex-direction: column; gap: 16px; }
+.ab-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.ab-title { margin: 0 0 4px; font-size: 16px; font-weight: 700; }
+.ab-subtitle { margin: 0; font-size: 13px; color: var(--text-muted); }
+.ab-generate-btn {
+  flex-shrink: 0;
+  padding: 9px 18px;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.ab-generate-btn:hover:not(:disabled) { background: #6d28d9; }
+.ab-generate-btn:disabled { opacity: 0.6; cursor: default; }
+
+.ab-variations { display: flex; flex-direction: column; gap: 12px; }
+.ab-variation-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  transition: border-color 0.15s;
+}
+.ab-variation-loaded { border-color: #7c3aed; background: #faf5ff; }
+.ab-variation-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.ab-variation-label { font-size: 14px; font-weight: 700; color: #5b21b6; }
+.ab-loaded-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #7c3aed;
+  background: #ede9fe;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.ab-rationale { margin: 0 0 12px; font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+.ab-fields { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.ab-field { display: flex; gap: 8px; font-size: 13px; }
+.ab-field-key { font-weight: 600; color: var(--text-muted); white-space: nowrap; min-width: 80px; }
+.ab-field-value { color: var(--text); line-height: 1.4; }
+
+.ab-load-btn {
+  padding: 7px 16px;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ab-load-btn:hover { background: #6d28d9; }
+
+.ab-empty {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* ── Google Display Ad Preview ── */

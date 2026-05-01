@@ -1,5 +1,5 @@
 export interface CopyRequest {
-  platform: 'google' | 'meta';
+  platform: 'google' | 'meta' | 'tiktok';
   format: string;
   goal: string;
   businessDescription: string;
@@ -13,6 +13,8 @@ export interface CopySuggestions {
   descriptions?: string[];
   primaryTexts?: string[];
   overlayTexts?: string[];
+  captions?: string[];
+  hashtags?: string[];
 }
 
 export async function generateCopy(req: CopyRequest): Promise<CopySuggestions> {

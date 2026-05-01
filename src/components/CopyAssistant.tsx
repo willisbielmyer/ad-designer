@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { generateCopy, type CopySuggestions } from '../utils/generateCopy';
 
 interface Props {
-  platform: 'google' | 'meta';
+  platform: 'google' | 'meta' | 'tiktok';
   format: string;
   goal: string;
   keywords?: string;
@@ -35,6 +35,7 @@ export function CopyAssistant({ platform, format, goal, keywords, onApply }: Pro
   const isGoogleDisplay = platform === 'google' && format === 'display';
   const isMetaFeed = platform === 'meta' && format === 'feed';
   const isMetaStories = platform === 'meta' && format === 'stories_reels';
+  const isTikTok = platform === 'tiktok';
 
   return (
     <div className="copy-assistant">
@@ -184,6 +185,37 @@ export function CopyAssistant({ platform, format, goal, keywords, onApply }: Pro
                       <span className="ca-char-hint">{ot.length} chars</span>
                       <div className="ca-apply-btns">
                         <button type="button" className="ca-apply-btn" onClick={() => onApply('overlayText', 0, ot)}>→ Apply</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* TikTok captions */}
+              {isTikTok && results.captions && (
+                <div className="ca-section">
+                  <div className="ca-section-label">Captions (100 chars)</div>
+                  {results.captions.map((c: string, i: number) => (
+                    <div key={i} className="ca-suggestion">
+                      <span className="ca-suggestion-text">{c}</span>
+                      <span className="ca-char-hint">{c.length}/100</span>
+                      <div className="ca-apply-btns">
+                        <button type="button" className="ca-apply-btn" onClick={() => onApply('caption', 0, c)}>→ Apply</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* TikTok hashtags */}
+              {isTikTok && results.hashtags && (
+                <div className="ca-section">
+                  <div className="ca-section-label">Hashtag Sets</div>
+                  {results.hashtags.map((h: string, i: number) => (
+                    <div key={i} className="ca-suggestion">
+                      <span className="ca-suggestion-text">{h}</span>
+                      <div className="ca-apply-btns">
+                        <button type="button" className="ca-apply-btn" onClick={() => onApply('hashtags', 0, h)}>→ Apply</button>
                       </div>
                     </div>
                   ))}

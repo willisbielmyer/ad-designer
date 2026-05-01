@@ -12,12 +12,14 @@ const PLATFORM_COLOR: Record<Platform, string> = {
   google: '#4285F4',
   meta: '#0866FF',
   lsa: '#34A853',
+  tiktok: '#fe2c55',
 };
 
 const PLATFORM_ICON: Record<Platform, string> = {
   google: 'G',
   meta: 'f',
   lsa: '✓',
+  tiktok: '♪',
 };
 
 export function CampaignManager({ currentAd, currentPlatform, onLoad }: Props) {

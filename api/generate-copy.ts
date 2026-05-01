@@ -118,5 +118,24 @@ Rules:
 - 85% of Stories are watched without sound — text must stand alone`;
   }
 
+  if (platform === 'tiktok') {
+    return `You are an expert TikTok Ads copywriter. Generate ad copy for a TikTok In-Feed ad.
+
+Business: ${businessDescription}
+Campaign goal: ${goal}
+
+Return ONLY a valid JSON object:
+{
+  "captions": ["c1", "c2", "c3"],
+  "hashtags": ["#h1 #h2 #h3 #h4", "#h5 #h6 #h7", "#h8 #h9 #h10"]
+}
+
+Rules:
+- Captions: max 100 characters each, conversational and native to TikTok culture
+- Hashtags: 3–5 tags per set, mix of trending (#fyp, #viral) and niche-specific
+- Tone: authentic, casual, scroll-stopping — not corporate
+- Hook in the first few words of each caption`;
+  }
+
   return `Generate ad copy for: ${businessDescription}. Return JSON: {"headlines": [], "descriptions": []}`;
 }

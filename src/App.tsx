@@ -19,6 +19,7 @@ function Header() {
             <>
               <span className="nav-badge google">Google</span>
               <span className="nav-badge meta">Meta</span>
+              <span className="nav-badge tiktok">TikTok</span>
               <span className="nav-badge lsa">LSA</span>
             </>
           ) : (

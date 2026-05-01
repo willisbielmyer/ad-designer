@@ -1,4 +1,4 @@
-export type Platform = 'google' | 'meta' | 'lsa';
+export type Platform = 'google' | 'meta' | 'lsa' | 'tiktok';
 export type AdGoal = 'traffic' | 'leads' | 'awareness' | 'calls';
 
 export interface GoogleAd {
@@ -87,6 +87,36 @@ export type MetaCTA =
 
 export type MetaPlacement = 'feed' | 'stories' | 'reels' | 'instagram' | 'marketplace';
 
+export type TikTokCTA =
+  | 'Learn More'
+  | 'Shop Now'
+  | 'Sign Up'
+  | 'Download'
+  | 'Book Now'
+  | 'Contact Us'
+  | 'Get Quote'
+  | 'Subscribe';
+
+export interface TikTokAd {
+  platform: 'tiktok';
+  goal: 'traffic' | 'leads' | 'awareness' | 'app_installs';
+  campaignName: string;
+  dailyBudget: string;
+  videoDescription: string;
+  videoDuration: '5-15s' | '15-30s' | '30-60s';
+  musicDescription?: string;
+  caption: string;
+  hashtags: string;
+  ctaButton: TikTokCTA;
+  destinationUrl: string;
+  ageMin: number;
+  ageMax: number;
+  genderTargeting: 'all' | 'male' | 'female';
+  locationTargeting: string;
+  interestTargeting: string;
+  generatedImageUrl?: string;
+}
+
 export interface LSAAd {
   platform: 'lsa';
   goal: 'leads' | 'calls';
@@ -101,7 +131,7 @@ export interface LSAAd {
   insuranceProvider?: string;
 }
 
-export type AnyAd = GoogleAd | GoogleDisplayAd | MetaAd | LSAAd;
+export type AnyAd = GoogleAd | GoogleDisplayAd | MetaAd | TikTokAd | LSAAd;
 
 export interface SavedCampaign {
   id: string;
