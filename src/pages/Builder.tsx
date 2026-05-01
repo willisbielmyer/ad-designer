@@ -211,52 +211,49 @@ export function Builder() {
           )}
         </div>
 
-        {activeTab === 'preview' && (
-          <div className="right-panel-content">
-            {googleSearchAd && <GoogleAdPreview ad={googleSearchAd} />}
-            {googleDisplayAd && <GoogleDisplayPreview ad={googleDisplayAd} />}
-            {draft?.platform === 'meta' && <MetaAdPreview ad={draft as MetaAd} />}
-            {draft?.platform === 'tiktok' && <TikTokPreview ad={draft as TikTokAd} />}
-            {draft?.platform === 'lsa' && <LSAPreview ad={draft as LSAAd} />}
-            {!draft && (
-              <div className="preview-empty">
-                <div className="preview-empty-icon">👆</div>
-                <p>Start filling in the form and your ad preview will appear here.</p>
-              </div>
-            )}
-          </div>
-        )}
-
-        {activeTab === 'instructions' && submitted && (
-          <div className="right-panel-content">
-            <div className="instructions-header">
-              <div className="platform-badge" style={{ background: activePlatform.color }}>{activePlatform.icon}</div>
-              <div>
-                <h2>Posting Instructions</h2>
-                <p className="subtitle">
-                  {activePlatform.label}
-                  {submitted.platform === 'google' && (submitted as GoogleAd | GoogleDisplayAd).format === 'display' ? ' Display'
-                    : submitted.platform === 'google' ? ' Search' : ''}
-                  {' '}— follow these steps in order
-                </p>
-              </div>
+        {/* All panels always rendered — hidden with display:none to preserve state across tab switches */}
+        <div className="right-panel-content" style={{ display: activeTab === 'preview' ? 'flex' : 'none' }}>
+          {googleSearchAd && <GoogleAdPreview ad={googleSearchAd} />}
+          {googleDisplayAd && <GoogleDisplayPreview ad={googleDisplayAd} />}
+          {draft?.platform === 'meta' && <MetaAdPreview ad={draft as MetaAd} />}
+          {draft?.platform === 'tiktok' && <TikTokPreview ad={draft as TikTokAd} />}
+          {draft?.platform === 'lsa' && <LSAPreview ad={draft as LSAAd} />}
+          {!draft && (
+            <div className="preview-empty">
+              <div className="preview-empty-icon">👆</div>
+              <p>Start filling in the form and your ad preview will appear here.</p>
             </div>
-            <StepList steps={getSteps()} platformColor={activePlatform.color} />
-          </div>
-        )}
+          )}
+        </div>
 
-        {activeTab === 'instructions' && !submitted && (
-          <div className="preview-empty">
-            <div className="preview-empty-icon">📋</div>
-            <p>Fill in the form and click "Generate Instructions" to see the step-by-step posting guide.</p>
-          </div>
-        )}
+        <div className="right-panel-content" style={{ display: activeTab === 'instructions' ? 'flex' : 'none' }}>
+          {submitted ? (
+            <>
+              <div className="instructions-header">
+                <div className="platform-badge" style={{ background: activePlatform.color }}>{activePlatform.icon}</div>
+                <div>
+                  <h2>Posting Instructions</h2>
+                  <p className="subtitle">
+                    {activePlatform.label}
+                    {submitted.platform === 'google' && (submitted as GoogleAd | GoogleDisplayAd).format === 'display' ? ' Display'
+                      : submitted.platform === 'google' ? ' Search' : ''}
+                    {' '}— follow these steps in order
+                  </p>
+                </div>
+              </div>
+              <StepList steps={getSteps()} platformColor={activePlatform.color} />
+            </>
+          ) : (
+            <div className="preview-empty">
+              <div className="preview-empty-icon">📋</div>
+              <p>Fill in the form and click "Generate Instructions" to see the step-by-step posting guide.</p>
+            </div>
+          )}
+        </div>
 
-        {activeTab === 'variations' && (
-          <div className="right-panel-content">
-            <ABVariations draft={draft} onLoadVariation={loadVariation} />
-          </div>
-        )}
+        <div className="right-panel-content" style={{ display: activeTab === 'variations' ? 'flex' : 'none' }}>
+          <ABVariations draft={draft} onLoadVariation={loadVariation} />
+        </div>
       </div>
     </div>
   );
