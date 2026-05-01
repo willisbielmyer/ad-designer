@@ -45,6 +45,7 @@ export interface GoogleDisplayAd {
   callToAction: GoogleDisplayCTA;
   imageDescriptions: string[];
   logoDescription: string;
+  generatedImageUrl?: string;
   locationTargeting: string;
   targetingType: 'contextual' | 'audience' | 'placement' | 'remarketing';
   audienceDescription?: string;
@@ -64,6 +65,7 @@ export interface MetaAd {
   ctaButton: MetaCTA;
   destinationUrl: string;
   imageDescription: string;
+  generatedImageUrl?: string;
   ageMin: number;
   ageMax: number;
   genderTargeting: 'all' | 'male' | 'female';

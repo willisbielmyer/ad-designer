@@ -3,6 +3,7 @@ import type { MetaAd, AdGoal, MetaCTA, MetaPlacement } from '../types/ads';
 import { META_LIMITS } from '../platforms/meta';
 import { CharCount } from './CharCount';
 import { CopyAssistant } from './CopyAssistant';
+import { ImageGenerator } from './ImageGenerator';
 
 interface Props {
   onSubmit: (ad: MetaAd) => void;
@@ -285,6 +286,13 @@ export function MetaForm({ onSubmit, onChange, initialValues }: Props) {
           />
           <small className="hint">Required size: {imageHint}</small>
         </div>
+
+        <ImageGenerator
+          platform="meta"
+          format={ad.format}
+          initialDescription={ad.imageDescription}
+          onGenerated={(url) => set('generatedImageUrl', url)}
+        />
       </div>
 
       <div className="form-section">

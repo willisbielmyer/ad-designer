@@ -43,15 +43,21 @@ export function MetaStoriesPreview({ ad }: Props) {
 
           {/* Background */}
           <div className="stories-bg">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-              <rect width="64" height="64" rx="6" fill="#4a4f5a"/>
-              <path d="M12 50l14-18 10 12 8-10 14 16H12z" fill="#6b7280"/>
-              <circle cx="44" cy="22" r="8" fill="#6b7280"/>
-            </svg>
-            {ad.imageDescription && (
-              <div className="stories-bg-hint">"{ad.imageDescription}"</div>
+            {ad.generatedImageUrl ? (
+              <img src={ad.generatedImageUrl} alt="Ad creative" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+            ) : (
+              <>
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                  <rect width="64" height="64" rx="6" fill="#4a4f5a"/>
+                  <path d="M12 50l14-18 10 12 8-10 14 16H12z" fill="#6b7280"/>
+                  <circle cx="44" cy="22" r="8" fill="#6b7280"/>
+                </svg>
+                {ad.imageDescription && (
+                  <div className="stories-bg-hint">"{ad.imageDescription}"</div>
+                )}
+                <div className="stories-bg-spec">1080 × 1920 px</div>
+              </>
             )}
-            <div className="stories-bg-spec">1080 × 1920 px</div>
           </div>
 
           {/* Overlay text */}

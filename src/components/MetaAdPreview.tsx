@@ -46,19 +46,23 @@ export function MetaAdPreview({ ad }: Props) {
           {truncated && <span className="meta-see-more"> See more</span>}
         </div>
 
-        {/* Image placeholder */}
+        {/* Image */}
         <div className="meta-image-placeholder">
-          <div className="meta-image-inner">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect width="48" height="48" rx="4" fill="#bcc0c4"/>
-              <path d="M14 34l8-10 6 7 4-5 8 8H14z" fill="#8a8d91"/>
-              <circle cx="32" cy="18" r="5" fill="#8a8d91"/>
-            </svg>
-            <div className="meta-image-hint">1200 × 628 px</div>
-            {ad.imageDescription && (
-              <div className="meta-image-desc">"{ad.imageDescription}"</div>
-            )}
-          </div>
+          {ad.generatedImageUrl ? (
+            <img src={ad.generatedImageUrl} alt="Ad creative" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          ) : (
+            <div className="meta-image-inner">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect width="48" height="48" rx="4" fill="#bcc0c4"/>
+                <path d="M14 34l8-10 6 7 4-5 8 8H14z" fill="#8a8d91"/>
+                <circle cx="32" cy="18" r="5" fill="#8a8d91"/>
+              </svg>
+              <div className="meta-image-hint">1200 × 628 px</div>
+              {ad.imageDescription && (
+                <div className="meta-image-desc">"{ad.imageDescription}"</div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Ad footer */}

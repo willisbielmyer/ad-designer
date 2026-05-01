@@ -19,13 +19,19 @@ export function GoogleDisplayPreview({ ad }: Props) {
       <div className="preview-label" style={{ fontSize: 10, marginTop: 4 }}>300 × 250 — Medium Rectangle</div>
       <div className="display-ad display-300x250">
         <div className="display-image-area">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="3" fill="#c8cdd4" />
-            <path d="M6 30l8-10 6 7 4-5 8 8H6z" fill="#9aa3ae" />
-            <circle cx="28" cy="12" r="5" fill="#9aa3ae" />
-          </svg>
-          {ad.imageDescriptions[0] && (
-            <div className="display-image-hint">"{ad.imageDescriptions[0]}"</div>
+          {ad.generatedImageUrl ? (
+            <img src={ad.generatedImageUrl} alt="Ad creative" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          ) : (
+            <>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="3" fill="#c8cdd4" />
+                <path d="M6 30l8-10 6 7 4-5 8 8H6z" fill="#9aa3ae" />
+                <circle cx="28" cy="12" r="5" fill="#9aa3ae" />
+              </svg>
+              {ad.imageDescriptions[0] && (
+                <div className="display-image-hint">"{ad.imageDescriptions[0]}"</div>
+              )}
+            </>
           )}
         </div>
         <div className="display-body">

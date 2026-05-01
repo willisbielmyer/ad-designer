@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { GoogleDisplayAd, AdGoal, GoogleDisplayCTA } from '../types/ads';
 import { CharCount } from './CharCount';
 import { CopyAssistant } from './CopyAssistant';
+import { ImageGenerator } from './ImageGenerator';
 
 interface Props {
   onSubmit: (ad: GoogleDisplayAd) => void;
@@ -284,6 +285,13 @@ export function GoogleDisplayForm({ onSubmit, onChange, initialValues }: Props) 
             placeholder="e.g. Company logo on white background (PNG, 1:1)"
           />
         </div>
+
+        <ImageGenerator
+          platform="google"
+          format="display"
+          initialDescription={ad.imageDescriptions[0]}
+          onGenerated={(url) => set('generatedImageUrl', url)}
+        />
 
         {[0, 1, 2].map((i) => (
           <div className="field-group" key={i}>
