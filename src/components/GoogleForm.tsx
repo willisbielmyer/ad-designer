@@ -25,17 +25,22 @@ const defaultAd: GoogleAd = {
   locationTargeting: '',
 };
 
+const DRAFT_KEY = 'ad-designer-google-search-draft';
+
 export function GoogleForm({ onSubmit, onChange, initialValues }: Props) {
-  const init = initialValues ?? defaultAd;
+  const savedDraft = !initialValues ? (() => {
+    try { const s = sessionStorage.getItem(DRAFT_KEY); return s ? JSON.parse(s) : null; } catch { return null; }
+  })() : null;
+
+  const init = initialValues ?? savedDraft ?? defaultAd;
   const [ad, setAd] = useState<GoogleAd>(init);
   const [keywordsRaw, setKeywordsRaw] = useState(init.keywords.join('\n'));
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    onChange?.({
-      ...ad,
-      keywords: keywordsRaw.split('\n').map((k) => k.trim()).filter(Boolean),
-    });
+    const full = { ...ad, keywords: keywordsRaw.split('\n').map((k) => k.trim()).filter(Boolean) };
+    onChange?.(full);
+    try { sessionStorage.setItem(DRAFT_KEY, JSON.stringify(full)); } catch {}
   }, [ad, keywordsRaw]);
 
   function set<K extends keyof GoogleAd>(key: K, value: GoogleAd[K]) {

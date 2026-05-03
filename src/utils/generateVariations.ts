@@ -20,5 +20,9 @@ export async function generateVariations(ad: AnyAd): Promise<VariationsResult> {
     const err = await res.json().catch(() => ({ error: 'Unknown error' }));
     throw new Error(err.error || `HTTP ${res.status}`);
   }
-  return res.json();
+  const result = await res.json();
+  if (!Array.isArray(result.variations)) {
+    throw new Error('Invalid response from server. Please try again.');
+  }
+  return result;
 }
