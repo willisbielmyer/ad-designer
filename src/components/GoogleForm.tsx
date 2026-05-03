@@ -28,8 +28,8 @@ const defaultAd: GoogleAd = {
 const DRAFT_KEY = 'ad-designer-google-search-draft';
 
 export function GoogleForm({ onSubmit, onChange, initialValues }: Props) {
-  const savedDraft = !initialValues ? (() => {
-    try { const s = sessionStorage.getItem(DRAFT_KEY); return s ? JSON.parse(s) : null; } catch { return null; }
+  const savedDraft: GoogleAd | null = !initialValues ? (() => {
+    try { const s = sessionStorage.getItem(DRAFT_KEY); return s ? (JSON.parse(s) as GoogleAd) : null; } catch (_e) { return null; }
   })() : null;
 
   const init = initialValues ?? savedDraft ?? defaultAd;
