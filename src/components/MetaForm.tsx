@@ -277,6 +277,17 @@ export function MetaForm({ onSubmit, onChange, initialValues }: Props) {
         </div>
 
         <div className="field-group">
+          <label>Image URL (paste from Unsplash or any photo site)</label>
+          <input
+            type="url"
+            value={ad.generatedImageUrl || ''}
+            onChange={(e) => set('generatedImageUrl', e.target.value)}
+            placeholder="https://images.unsplash.com/..."
+          />
+          <small className="hint">Paste any image URL to show it in the preview · Required size: {imageHint}</small>
+        </div>
+
+        <div className="field-group">
           <label>Image / Video Description</label>
           <input
             type="text"
@@ -284,7 +295,6 @@ export function MetaForm({ onSubmit, onChange, initialValues }: Props) {
             onChange={(e) => set('imageDescription', e.target.value)}
             placeholder="Describe the creative you plan to use"
           />
-          <small className="hint">Required size: {imageHint}</small>
         </div>
 
         <ImageGenerator
