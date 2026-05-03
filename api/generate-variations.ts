@@ -26,6 +26,15 @@ export default async function handler(req: any, res: any) {
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     const result = jsonMatch ? JSON.parse(jsonMatch[0]) : { variations: [] };
 
+    // Ensure fields are nested under 'fields' key — handle both flat and nested responses
+    if (Array.isArray(result.variations)) {
+      result.variations = result.variations.map((v: any) => {
+        if (v.fields && typeof v.fields === 'object') return v;
+        const { label, rationale, ...fields } = v;
+        return { label, rationale, fields };
+      });
+    }
+
     return res.json(result);
   } catch (err) {
     console.error('[generate-variations]', err);
@@ -77,12 +86,16 @@ Return ONLY valid JSON — no other text:
     {
       "label": "Variation A: [angle name, e.g. Urgency / Benefit / Trust / Question]",
       "rationale": "One sentence: what strategy this uses and why it might outperform the original",
-      ${copyFields}
+      "fields": {
+        ${copyFields}
+      }
     },
     {
       "label": "Variation B: [different angle name]",
       "rationale": "One sentence: what strategy this uses and why it might outperform Variation A",
-      ${copyFields}
+      "fields": {
+        ${copyFields}
+      }
     }
   ]
 }
