@@ -80,7 +80,7 @@ export function ABVariations({ draft, onLoadVariation }: Props) {
               <p className="ab-rationale">{v.rationale}</p>
 
               <div className="ab-fields">
-                {Object.entries(v.fields).map(([key, value]) => (
+                {Object.entries(v.fields ?? {}).map(([key, value]) => (
                   <div key={key} className="ab-field">
                     <span className="ab-field-key">{formatFieldName(key)}</span>
                     <span className="ab-field-value">
