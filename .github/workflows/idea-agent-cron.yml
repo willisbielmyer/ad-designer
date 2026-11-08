@@ -1,0 +1,14 @@
+name: Idea Agent schedule
+on:
+  schedule:
+    - cron: '5 * * * *' # hourly trigger; the app only sends every IDEA_INTERVAL_HOURS
+  workflow_dispatch: {}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger idea run
+        run: |
+          curl --fail --silent --show-error --max-time 90 \
+            -H "Authorization: Bearer ${{ secrets.IDEA_CRON_SECRET }}" \
+            "${{ secrets.IDEA_APP_URL }}/api/cron/hourly"
