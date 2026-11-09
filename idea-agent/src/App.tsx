@@ -18,6 +18,8 @@ type Idea = {
   target_customer: string;
   differentiation: string;
   competitor_level: 'low' | 'medium' | 'high';
+  novelty?: 'none_found' | 'partial';
+  searches?: string[];
   competitor_evidence: string;
   sources: { title: string; url: string }[];
 };
@@ -309,9 +311,9 @@ export default function App() {
                     <div className="idea-row" key={`${delivery.id}-${index}`}>
                       <div className="idea-type">{CATEGORY_LABELS[idea.category]}</div>
                       <div className="idea-content"><h3>{idea.title}</h3><p>{idea.summary}</p><small>For {idea.target_customer}</small>
-                        <div className="competition"><span className={`competition-dot ${idea.competitor_level}`} />{idea.competitor_level} competition <span className="evidence">{idea.competitor_evidence}</span></div>
+                        <div className="competition"><span className={`competition-dot ${idea.competitor_level}`} />{idea.novelty === 'none_found' ? `Novel: no existing match in ${idea.searches?.length ?? 0} searches` : idea.novelty === 'partial' ? 'Partial overlap with existing' : `${idea.competitor_level} competition`} <span className="evidence">{idea.competitor_evidence}</span></div>
                         <p className="differentiation">{idea.differentiation}</p>
-                        {idea.sources.length > 0 && <div className="sources">Research: {idea.sources.map((source, i) => <a key={`${source.url}-${i}`} href={source.url} target="_blank" rel="noreferrer">{source.title || new URL(source.url).hostname}</a>)}</div>}
+                        {idea.sources.length > 0 && <div className="sources">{idea.novelty ? 'Closest found' : 'Research'}: {idea.sources.map((source, i) => <a key={`${source.url}-${i}`} href={source.url} target="_blank" rel="noreferrer">{source.title || new URL(source.url).hostname}</a>)}</div>}
                       </div>
                     </div>
                   ))}

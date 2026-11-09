@@ -8,6 +8,10 @@ A private, opt-in app that researches three business ideas on a schedule and sen
 
 It uses Anthropic web search for research, Supabase for auth/settings/history, a free Telegram bot for delivery, and a free external scheduler (GitHub Actions) to trigger runs.
 
+## How ideas are found
+
+Each run first invents candidate ideas from scratch (no search), then tries to disprove each one with several differently worded web searches. Ideas that already exist are discarded. Only ideas where nothing equivalent turns up are labelled novel; if a category has no clean survivor, a partial-overlap idea may be sent and is labelled as such. "No match found" is not proof nobody has built it.
+
 ## Cost
 
 Everything is free except the Anthropic API:

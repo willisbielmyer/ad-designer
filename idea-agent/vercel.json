@@ -1,5 +1,5 @@
 {
   "functions": {
-    "api/cron/hourly.ts": { "maxDuration": 60 }
+    "api/cron/hourly.ts": { "maxDuration": 300 }
   }
 }
